@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
+from src import item
 from src.item import Item
 
 
@@ -24,3 +25,21 @@ def test_calculate_total_price(item1):
 # test method apply_discount
 def test_apply_discount(item1):
     assert item1.apply_discount() == None
+    # assert item1.price() == None
+
+# test hw2: instantiate_from_csv
+def test_instantiate_from_csv(item1):
+    assert item1.name == "Смартфон"
+    assert item1.price == 10000
+    assert item1.quantity == 20
+
+# test hw2: string_to_number
+def test_string_to_number(item1):
+    assert item1.string_to_number("10000") == 10000
+    assert item1.string_to_number("20000") == 20000
+    assert item1.string_to_number("30000") == 30000
+    assert item1.string_to_number("40000") == 40000
+    assert item1.string_to_number("50000") == 50000
+    assert item1.string_to_number("60000") == 60000
+    assert item1.string_to_number("70000") == 70000
+    assert item1.string_to_number("80000") == 80000
