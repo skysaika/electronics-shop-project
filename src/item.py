@@ -1,3 +1,4 @@
+import csv
 
 from src.settings import take_from_csv
 
@@ -34,7 +35,6 @@ class Item:
         self.__name = name
         if len(self.__name) > 10:
             raise ValueError("Название должно быть не более 10 символов.")
-        self.__name = name
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -42,6 +42,19 @@ class Item:
         cls.all = []
         for data in take_from_csv():
             cls(*data)
+
+    @staticmethod
+    def take_from_csv() -> list:
+        """Получение данных из файла csv"""
+        data_list = []
+        with open('../src/items.csv', 'r', encoding='windows-1251') as csvfile:
+            data_csv = csv.reader(csvfile, delimiter=',')
+            for elem in data_csv:
+                if elem[0] == 'name':
+                    continue
+                else:
+                    data_list.append(elem)
+            return data_list
 
     @staticmethod
     def string_to_number(number: str) -> int:
