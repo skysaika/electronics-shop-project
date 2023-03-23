@@ -31,9 +31,9 @@ class Item:
     @name.setter
     def name(self, name: str) -> None:
         """Сеттер для названия товара."""
-        self.__name = name
         if len(self.__name) > 10:
             raise ValueError("Название должно быть не более 10 символов.")
+        self.__name = name
 
     @classmethod
     def instantiate_from_csv(cls):
