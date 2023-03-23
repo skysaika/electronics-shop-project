@@ -1,7 +1,5 @@
 import csv
 
-from src.settings import take_from_csv
-
 
 class Item:
     """
@@ -9,6 +7,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    CSV_FILE = '../src/items.csv'
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -38,23 +37,12 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        """Инициализация класса Item из файла csv."""
         cls.all = []
-        for data in take_from_csv():
-            cls(*data)
-
-    @staticmethod
-    def take_from_csv() -> list:
-        """Получение данных из файла csv"""
-        data_list = []
-        with open('../src/items.csv', 'r', encoding='windows-1251') as csvfile:
-            data_csv = csv.reader(csvfile, delimiter=',')
-            for elem in data_csv:
-                if elem[0] == 'name':
-                    continue
-                else:
-                    data_list.append(elem)
-            return data_list
+        with open(cls.CSV_FILE, encoding='windows-1251') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                cls(row['name'], float(row['price']), int(row['quantity']))
+            return cls.all
 
     @staticmethod
     def string_to_number(number: str) -> int:
