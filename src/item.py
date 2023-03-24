@@ -7,7 +7,6 @@ class Item:
     """
     pay_rate = 1.0
     all = []
-    CSV_FILE = '../src/items.csv'
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -31,18 +30,19 @@ class Item:
     @name.setter
     def name(self, name: str) -> None:
         """Сеттер для названия товара."""
-        if len(self.__name) > 10:
+        if len(name) > 10:
             raise ValueError("Название должно быть не более 10 символов.")
         self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls):
-        cls.all = []
-        with open(cls.CSV_FILE, encoding='windows-1251') as file:
+    def instantiate_from_csv(cls, CSV_FILE='../src/items.csv'):
+        # cls.all = []
+        with open(CSV_FILE, encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                cls(row['name'], float(row['price']), int(row['quantity']))
-            return cls.all
+                cls.all.append((row['name'], float(row['price']), int(row['quantity'])))
+                # cls(row['name'], float(row['price']), int(row['quantity']))
+            # return cls.all
 
     @staticmethod
     def string_to_number(number: str) -> int:
