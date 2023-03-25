@@ -5,7 +5,8 @@ from src.item import Item
 
 @pytest.fixture
 def item1():
-    return Item("Смартфон", 10000, 20)
+    return Item('Смартфон', 10000, 20)
+
 
 def test_instantiate_from_csv(item1):
     """Тестирует метод instantiate_from_csv."""
@@ -19,6 +20,16 @@ def test_init(item1):
     assert item1.name == "Смартфон"
     assert item1.price == 10000
     assert item1.quantity == 20
+
+
+def test_repr(item1):
+    """Тестирует метод repr."""
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test_str(item1):
+    """Тестирует метод str."""
+    assert str(item1) == "Смартфон"
 
 
 def test_calculate_total_price(item1):
@@ -39,16 +50,16 @@ def test_len_name_setter(item1):
     with pytest.raises(ValueError):
         item1.name = 'СуперСмартфон'
 
+
+
+
 def test_change_name_setter(item1):
     item1.name = "Тарелка"
     assert item1.name == "Тарелка"
 
 
-
-
-
-# test hw2: string_to_number
 def test_string_to_number(item1):
     """Тестирует метод string_to_number."""
     assert item1.string_to_number("10000") == 10000
     assert item1.string_to_number("2.034") == 2
+

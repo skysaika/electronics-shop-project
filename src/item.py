@@ -22,6 +22,12 @@ class Item:
 
         Item.all.append(self)
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
     @property
     def name(self) -> str:
         """Геттер для названия товара."""
@@ -36,13 +42,11 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, CSV_FILE='../src/items.csv'):
-        # cls.all = []
         with open(CSV_FILE, encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
                 cls.all.append((row['name'], float(row['price']), int(row['quantity'])))
-                # cls(row['name'], float(row['price']), int(row['quantity']))
-            # return cls.all
+
 
     @staticmethod
     def string_to_number(number: str) -> int:
