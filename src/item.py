@@ -66,3 +66,9 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __add__(self, other: 'Item'):
+        """Складывает экземпляры класса """
+        if not isinstance(other, Item):
+            raise TypeError('Нельзя складывать разные классы.')
+        return self.quantity + other.quantity

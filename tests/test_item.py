@@ -51,8 +51,6 @@ def test_len_name_setter(item1):
         item1.name = 'СуперСмартфон'
 
 
-
-
 def test_change_name_setter(item1):
     item1.name = "Тарелка"
     assert item1.name == "Тарелка"
@@ -62,4 +60,14 @@ def test_string_to_number(item1):
     """Тестирует метод string_to_number."""
     assert item1.string_to_number("10000") == 10000
     assert item1.string_to_number("2.034") == 2
+
+
+def test_positive_add(item1):
+    test_item1 = Item('Смартфон', 1000, 3)
+    assert item1 + test_item1 == 23
+
+
+def test_error_add(item1):
+    with pytest.raises(TypeError):
+        result = item1 + 10
 
