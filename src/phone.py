@@ -22,3 +22,9 @@ class Phone(Item):
     def __repr__(self):
         data = super().__repr__()
         return data.replace(')', f', {self.__number_of_sim})')
+
+    @classmethod
+    def validate_sim_count(cls, number_of_sim: int):
+        """Проверка что кол-во сим-карт целое число и что число"""
+        return (0 < number_of_sim < 4) and type(number_of_sim) is int
+
