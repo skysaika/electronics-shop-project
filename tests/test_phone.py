@@ -33,6 +33,12 @@ def test_phone_repr(phone1):
 
 
 def test_failing_add_classes(phone1, item1):
-    """Тест ошибки"""
+    """Тест должен показать ошибку при сложении не phone1 или не item1"""
     with pytest.raises(TypeError):
-        phone1 + 24
+        phone1 + 25
+
+def test_number_of_sim(phone1, item1):
+    """Тестируем количество сим-карт"""
+    with pytest.raises(ValueError):
+        phone1.number_of_sim = 0
+
