@@ -12,18 +12,13 @@ class MixinKeyboardLanguage:
         """Геттер language"""
         return self.__language
 
-    @language.setter
-    def language(self, language):
-        """Сеттер language"""
-        if language not in self.__language:
-            raise AttributeError('Язык должен быть EN или RU')
-
     def change_lang(self):
         """Метод для смены раскладки языка"""
-        if self.__language == 'RU':
-            self.__language = 'EN'
-        else:
+        if self.__language == 'EN':
             self.__language = 'RU'
+            return self
+        else:
+            self.__language = 'EN'
         return self
 
 
