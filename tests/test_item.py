@@ -52,6 +52,7 @@ def test_len_name_setter(item1):
 
 
 def test_change_name_setter(item1):
+    """Тест смены названия"""
     item1.name = "Тарелка"
     assert item1.name == "Тарелка"
 
@@ -63,11 +64,23 @@ def test_string_to_number(item1):
 
 
 def test_positive_add(item1):
+    """Тестирует сложение классов"""
     test_item1 = Item('Смартфон', 1000, 3)
     assert item1 + test_item1 == 23
 
 
 def test_error_add(item1):
+    """Тестирует ошибку сложения"""
     with pytest.raises(TypeError):
         result = item1 + 10
 
+
+def test_get_data_from_csv(item1):
+    """Тест получения данных из csv"""
+    Item.instantiate_from_csv(CSV_FILE='../src/items.csv')
+
+
+def test_init_instantiate_csv_error(args=None):
+    """Тест ошибки инита"""
+    with pytest.raises(TypeError):
+        args[0] = "Файл item.csv поврежден"
